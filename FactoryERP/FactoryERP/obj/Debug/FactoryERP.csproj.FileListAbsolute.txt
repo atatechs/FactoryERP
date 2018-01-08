@@ -1,0 +1,2 @@
+C:\Users\MuhammadAli\Downloads\FactoryERP\trunk\FactoryERP\FactoryERP\obj\Debug\FactoryERP.csprojResolveAssemblyReference.cache
+C:\Users\MuhammadAli\Downloads\FactoryERP\trunk\FactoryERP\FactoryERP\obj\Debug\FactoryERP.csproj.CoreCompileInputs.cache

@@ -15,18 +15,18 @@ namespace FactoryERP.Controllers
             return View();
         }
 
-        public void FactoryERPBusiness()
+        public static void FactoryERPBusiness()
         {
             EBO Login = new EBO("Login");
             Login.AddAttribute("Username", "_string", NULL.NotNull);
             Login.AddAttribute("Password", "_string");
             Login.AddAttribute("Active", "_bool");
             Login.AddAttribute("Lock", "_bool");
-            Login.AddAttribute("LastLogin", "_datetime");
-            Login.AddAttribute("LastUnsuccessfulLogin", "_datetime");
-            Login.AddAttribute("LastRecoveryUsed", "_datetime");
-            Login.AddAttribute("CreatedDate", "_datetime");
-            Login.AddAttribute("LastModified", "_datetime");
+            Login.AddAttribute("LastLogin", "_DateTime");
+            Login.AddAttribute("LastUnsuccessfulLogin", "_DateTime");
+            Login.AddAttribute("LastRecoveryUsed", "_DateTime");
+            Login.AddAttribute("CreatedDate", "_DateTime");
+            Login.AddAttribute("LastModified", "_DateTime");
             Login.AddAttribute("LastPassword", "_string");
             Login.AddAttribute("Role", "Role");
 
@@ -36,11 +36,19 @@ namespace FactoryERP.Controllers
             EBO Role = new EBO("Role");
             Role.AddAttribute("RoleName", "_string", NULL.NotNull);
             Role.AddAttribute("Active", "_bool");
-            Role.AddAttribute("CreatedDate", "_datetime");
-            Role.AddAttribute("UpdatedDate", "_datetime");
+            Role.AddAttribute("CreatedDate", "_DateTime");
+            Role.AddAttribute("UpdatedDate", "_DateTime");
 
             Role.AddCandidateKey("RoleName");
             Framework.AddEBO(Role);
+
+            EBO Page = new EBO("Page");
+            Page.AddAttribute("PageName", "_string", NULL.NotNull);
+            Page.AddAttribute("CreatedDate", "_DateTime");
+            Page.AddAttribute("UpdatedDate", "_DateTime");
+
+            Page.AddCandidateKey("PageName");
+            Framework.AddEBO(Page);
 
             EBO Menu = new EBO("Menu");
             Menu.AddAttribute("ParentMenu", "Menu", NULL.NotNull);
@@ -53,8 +61,8 @@ namespace FactoryERP.Controllers
 
             SBO MenuMapping = new SBO("MenuMapping", "Role");
             MenuMapping.AddAttribute("Menu", "Menu");
-            MenuMapping.AddAttribute("CreatedDate", "_datetime");
-            MenuMapping.AddAttribute("UpdatedDate", "_datetime");
+            MenuMapping.AddAttribute("CreatedDate", "_DateTime");
+            MenuMapping.AddAttribute("UpdatedDate", "_DateTime");
 
             Framework.AddSBO(MenuMapping);
 
@@ -62,27 +70,27 @@ namespace FactoryERP.Controllers
             ControllerMethod.AddAttribute("ControllerName", "Menu");
             ControllerMethod.AddAttribute("ActionName", "_string");
             ControllerMethod.AddAttribute("Type", "_int");
-            ControllerMethod.AddAttribute("CreatedDate", "_datetime");
-            ControllerMethod.AddAttribute("UpdatedDate", "_datetime");
+            ControllerMethod.AddAttribute("CreatedDate", "_DateTime");
+            ControllerMethod.AddAttribute("UpdatedDate", "_DateTime");
 
             ControllerMethod.AddCandidateKey("ControllerName");
             Framework.AddEBO(ControllerMethod);
 
             SBO ControllerMapping = new SBO("ControllerMapping", "Role");
-            ControllerMapping.AddAttribute("Controller", "Controller");
-            ControllerMapping.AddAttribute("CreatedDate", "_datetime");
-            ControllerMapping.AddAttribute("UpdatedDate", "_datetime");
+            ControllerMapping.AddAttribute("Controller", "ControllerMethod");
+            ControllerMapping.AddAttribute("CreatedDate", "_DateTime");
+            ControllerMapping.AddAttribute("UpdatedDate", "_DateTime");
 
             Framework.AddSBO(ControllerMapping);
 
             EBO RistrictedSection = new EBO("RistrictedSection");
-            RistrictedSection.AddAttribute("DivID", "_int");
+            RistrictedSection.AddAttribute("DivID", "_string");
             RistrictedSection.AddAttribute("Comments", "_string");
-            RistrictedSection.AddAttribute("Page", "_int");
-            RistrictedSection.AddAttribute("CreatedDate", "_datetime");
-            RistrictedSection.AddAttribute("UpdatedDate", "_datetime");
+            RistrictedSection.AddAttribute("Page", "Page");
+            RistrictedSection.AddAttribute("CreatedDate", "_DateTime");
+            RistrictedSection.AddAttribute("UpdatedDate", "_DateTime");
 
-            ControllerMethod.AddCandidateKey("DivID");
+            RistrictedSection.AddCandidateKey("DivID");
             Framework.AddEBO(RistrictedSection);
 
             Framework.GenerateBusiness("FactoryERP", @"data source=Lenovo-PC\SQLEXPRESS; user id=sa; password=123;", "FactoryERP");
